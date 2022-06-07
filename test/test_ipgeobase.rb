@@ -20,7 +20,6 @@ class TestIpgeobase < Minitest::Test
       to_return(status: 200, body: file, headers: {})
       
     ip_meta = Ipgeobase.lookup('8.8.8.8')
-    pp ip_meta
     assert ip_meta.city == "Ashburn"
     assert ip_meta.country == "United States"
     assert ip_meta.countryCode == "US"
