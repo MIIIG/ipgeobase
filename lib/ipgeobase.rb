@@ -2,7 +2,6 @@
 
 require_relative "ipgeobase/version"
 require_relative "ipgeobase/ipdata"
-require "webmock"
 require "net/http"
 require "addressable/template"
 

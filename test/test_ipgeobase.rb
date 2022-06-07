@@ -9,6 +9,7 @@ class TestIpgeobase < Minitest::Test
   end
 
   def test_ip_data
+    file = File.new('test/response.xml', "r")
     stub_request(:get, "http://ip-api.com/xml/8.8.8.8").
       with(
         headers: {
@@ -16,13 +17,14 @@ class TestIpgeobase < Minitest::Test
         'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
         'User-Agent'=>'Ruby'
         }).
-      to_return(status: 200, body: "", headers: {})
+      to_return(status: 200, body: file, headers: {})
       
     ip_meta = Ipgeobase.lookup('8.8.8.8')
-    assert ip_meta.city = "Moscow"
-    assert ip_meta.country = "United States"
-    assert ip_meta.countryCode = "US"
-    assert ip_meta.lat = "39.03"
-    assert ip_meta.lon = "-77.5"
+    pp ip_meta
+    assert ip_meta.city == "Ashburn"
+    assert ip_meta.country == "United States"
+    assert ip_meta.countryCode == "US"
+    assert ip_meta.lat == "39.03"
+    assert ip_meta.lon == "-77.5"
   end
 end
